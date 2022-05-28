@@ -1,3 +1,4 @@
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -18,6 +19,9 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //services that makes our repository injects into our controllers 
+            services.AddScoped<IProductRepository, ProductRepository>();
+            
             services.AddControllers();
             //add the datacontext as a service so we can use it in other part of our apps
             //configuration of db
