@@ -41,6 +41,15 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
+
+            //Allo CORS
+            services.AddCors(opt => 
+            {
+                opt.AddPolicy("CorsPolicy", policy => 
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
         }
 
 
@@ -64,6 +73,10 @@ namespace API
 
             //our static files here.
             app.UseStaticFiles();
+
+
+            //middleware for allow CORS
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
