@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220525034304_InitialCreate")]
+    [Migration("20220530023629_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.Navigation("ProductType");
                 });
-#pragma warning restore 612, 618
+
         }
     }
 }

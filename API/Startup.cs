@@ -1,3 +1,4 @@
+using API.Helpers;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ namespace API
 
             //services that makes our repository injects into our controllers 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+            services.AddAutoMapper(typeof(MappingProfiles));
             
             services.AddControllers();
             //add the datacontext as a service so we can use it in other part of our apps
@@ -38,6 +41,7 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //Middleware
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -50,6 +54,9 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //our static files here.
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
