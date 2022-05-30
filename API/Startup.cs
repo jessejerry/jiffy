@@ -16,6 +16,8 @@ namespace API
         }
 
 
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -32,7 +34,8 @@ namespace API
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
 
 
-
+            
+            //Swagger
 
             services.AddSwaggerGen(c =>
             {
@@ -40,15 +43,19 @@ namespace API
             });
         }
 
+
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         //Middleware
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
 
             app.UseHttpsRedirection();
