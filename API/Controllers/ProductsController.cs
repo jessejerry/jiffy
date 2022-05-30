@@ -10,14 +10,10 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
 
-    //We need to give it the API controller attribute and Route. 
-    //adding the api/ is optional but conventional
-    [ApiController]
-    [Route("api/[controller]")]
-
-    //since this is a controller, you need to derive from ControllerBase, if it shows error,
+    //since this is a controller, you need to derive from ControllerBase, 
+    //but since we have a baseAPI controller we can derive from there, if it shows error,
     //click on command + . and select using for the base.
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         
         private readonly IGenericRepository<Product> __productsRepo;
